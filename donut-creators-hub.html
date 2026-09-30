@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Donut Creators Hub</title>
+<meta name="description" content="Free music, sound effects and images for DonutSMP creators, plus a Discord for feedback and collabs.">
+<link rel="icon" href="assets/images/donutsmp_logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;700;800&family=Silkscreen&display=swap" rel="stylesheet">
+<script>
+  // Apply the saved theme before first paint to avoid a flash.
+  try{ const t=localStorage.getItem("dch-theme"); if(t) document.documentElement.dataset.theme=t; }catch{}
+  document.documentElement.classList.add("js");
+</script>
+<style>
+:root{
+  --sky:#1a8cff;
+  --sky-deep:#0a62d8;
+  --navy:#0a1c52;
+  --navy-2:#13307e;
+  --glaze:#1f5bff;
+  --ice:#7fe3ff;
+  --dough:#e0a267;
+  --dough-deep:#c07a3f;
+  --page:#eef5ff;
+  --page-2:#e1ecff;
+  --surface:#ffffff;
+  --surface-2:#f3f7ff;
+  --ink:#0a1c52;
+  --ink-soft:#44548a;
+  --line:#0a1c52;
+  --shadow:#0a1c52;
+  --hair:rgba(10,28,82,.14);
+  --wave:rgba(10,28,82,.16);
+  --display:"Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pixel:"Silkscreen", ui-monospace, monospace;
+  --header:68px;
+  --player-h:0px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --page:#050d2b; --page-2:#081640; --surface:#0d1d55; --surface-2:#112466;
+    --ink:#eaf2ff; --ink-soft:#a9bbe6; --line:#02081f; --shadow:#010614;
+    --hair:rgba(169,187,230,.16); --wave:rgba(169,187,230,.2); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#050d2b; --page-2:#081640; --surface:#0d1d55; --surface-2:#112466;
+  --ink:#eaf2ff; --ink-soft:#a9bbe6; --line:#02081f; --shadow:#010614;
+  --hair:rgba(169,187,230,.16); --wave:rgba(169,187,230,.2); color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(var(--header) + 70px);-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;background:var(--page);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased;padding-bottom:var(--player-h);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--ice);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--display);line-height:1.05;margin:0;letter-spacing:-.015em}
+.wrap{max-width:1180px;margin:0 auto;padding:0 max(16px, env(safe-area-inset-left,0px))}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg.i{width:1.15em;height:1.15em;flex:none;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- Buttons ---------- */
+.btn{--bg:var(--ice);--fg:var(--navy);--bd:var(--navy);--sh:var(--navy);
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;font:800 16px/1 var(--body);padding:14px 20px;border:3px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--fg);text-decoration:none;cursor:pointer;box-shadow:4px 5px 0 var(--sh);transition:transform .1s, box-shadow .1s, background .15s;white-space:nowrap;user-select:none}
+.btn:hover{transform:translate(-1px,-2px);box-shadow:5px 7px 0 var(--sh)}
+.btn:active{transform:translate(3px,4px);box-shadow:1px 1px 0 var(--sh)}
+.btn-white{--bg:#fff}
+.btn-dough{--bg:var(--dough)}
+.btn-navy{--bg:var(--navy);--fg:#fff;--bd:#02081f;--sh:#02081f}
+.btn-sm{padding:10px 14px;font-size:15px;border-radius:9px;box-shadow:3px 4px 0 var(--sh)}
+.btn-sm:hover{box-shadow:4px 5px 0 var(--sh)}
+.icon-btn{display:grid;place-items:center;width:44px;height:44px;border-radius:10px;border:3px solid transparent;background:transparent;cursor:pointer;color:inherit}
+.icon-btn:hover{border-color:currentColor}
+
+/* ---------- Header ---------- */
+header.top{position:sticky;top:0;z-index:30;background:var(--sky);border-bottom:3px solid var(--navy);padding-top:env(safe-area-inset-top,0px);transition:box-shadow .2s}
+header.top.scrolled{box-shadow:0 6px 0 rgba(10,28,82,.18)}
+.nav{display:flex;align-items:center;gap:14px;height:var(--header)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font:800 19px/1 var(--display);letter-spacing:-.01em}
+.brand img{width:42px;height:42px;border-radius:10px;border:3px solid var(--navy);box-shadow:2px 3px 0 var(--navy)}
+.nav nav{display:flex;gap:4px;margin-left:auto}
+.nav nav a{display:flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-weight:800;padding:9px 14px;border-radius:10px;border:3px solid transparent}
+.nav nav a[aria-current="page"]{background:var(--navy);border-color:var(--navy)}
+.nav nav a:not([aria-current="page"]):hover{border-color:var(--navy)}
+.nav nav a .pill{font:400 11px/1 var(--pixel);background:var(--ice);color:var(--navy);border-radius:99px;padding:4px 7px 3px}
+.nav .icon-btn{color:#fff}
+.nav .icon-btn:hover{border-color:var(--navy)}
+.theme-dark-icon{display:none}
+:root[data-theme="dark"] .theme-dark-icon{display:block}
+:root[data-theme="dark"] .theme-light-icon{display:none}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .theme-dark-icon{display:block}
+  :root:not([data-theme="light"]) .theme-light-icon{display:none}
+}
+@media (max-width:920px){.brand span{display:none}}
+@media (max-width:700px){.nav .discord-top{display:none}.nav nav a{padding:9px 11px}}
+@media (max-width:420px){.nav{gap:6px}.nav nav{gap:0}.nav nav a{padding:8px 8px}.nav nav a .pill{display:none}.brand img{width:38px;height:38px}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;background:radial-gradient(120% 90% at 80% 10%,#44a7ff 0,transparent 55%),linear-gradient(170deg,var(--sky) 0%,var(--sky-deep) 100%);color:#fff;overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.hero-bg .gridlines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.07) 2px,transparent 2px);background-size:48px 48px;mask-image:linear-gradient(180deg,#000 20%,transparent 95%);-webkit-mask-image:linear-gradient(180deg,#000 20%,transparent 95%)}
+.cube{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);background:var(--c);border:3px solid var(--navy);box-shadow:3px 4px 0 rgba(10,28,82,.5);border-radius:3px;animation:bob var(--d) ease-in-out infinite alternate;animation-delay:var(--dl);opacity:.9}
+@keyframes bob{from{transform:translateY(0) rotate(var(--r))}to{transform:translateY(-22px) rotate(calc(var(--r) + 18deg))}}
+.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding-top:72px;padding-bottom:84px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font:400 13px/1 var(--pixel);letter-spacing:.04em;background:var(--navy);color:var(--ice);padding:9px 13px 8px;border-radius:99px;margin-bottom:22px;text-transform:uppercase}
+.eyebrow img{width:18px;height:18px}
+.hero h1{font-size:clamp(42px,6.6vw,84px);font-weight:800;color:#fff;text-shadow:3px 4px 0 var(--navy);letter-spacing:-.025em}
+.hero h1 .hl{color:var(--ice);display:inline-block;animation:wiggle 3.5s ease-in-out 1s infinite}
+@keyframes wiggle{0%,86%,100%{transform:none}90%{transform:rotate(-3deg) scale(1.04)}95%{transform:rotate(2deg)}}
+.hero .lead{font-size:clamp(17px,1.9vw,20px);max-width:32em;margin:24px 0 30px;color:#e7f1ff}
+.ip{display:flex;align-items:center;gap:14px;max-width:440px;background:#fff;color:var(--navy);border:3px solid var(--navy);border-radius:14px;padding:10px 10px 10px 12px;box-shadow:5px 6px 0 var(--navy);margin-bottom:22px}
+.ip img{width:44px;height:44px;flex:none}
+.ip-text{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.ip-label{font:400 11px/1 var(--pixel);letter-spacing:.06em;color:var(--glaze);text-transform:uppercase}
+.ip-value{font:800 22px/1.1 var(--display);overflow:hidden;text-overflow:ellipsis}
+.ip .btn{flex:none}
+.ctas{display:flex;flex-wrap:wrap;gap:14px}
+.hero-stats{list-style:none;display:flex;flex-wrap:wrap;gap:10px 26px;margin:34px 0 0;padding:0;color:#dcebff;font-weight:500}
+.hero-stats b{font:800 22px/1 var(--display);color:#fff;margin-right:4px}
+
+.hero-art{position:relative;justify-self:center;width:min(100%,440px);aspect-ratio:1}
+.art-card{position:absolute;inset:6%;border:4px solid var(--navy);border-radius:28px;overflow:hidden;box-shadow:12px 14px 0 var(--navy);transform:rotate(-4deg);animation:float 6s ease-in-out infinite, drop .8s cubic-bezier(.2,1.4,.4,1) both}
+.art-card img{width:100%;height:100%;object-fit:cover}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@keyframes drop{from{transform:translateY(-50px) rotate(-10deg) scale(.9);opacity:0}}
+.art-donut{position:absolute;width:30%;right:-4%;bottom:-2%;filter:drop-shadow(5px 7px 0 var(--navy));animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sticker{position:absolute;font:400 14px/1 var(--pixel);text-transform:uppercase;letter-spacing:.03em;padding:10px 12px 9px;border:3px solid var(--navy);border-radius:10px;box-shadow:3px 4px 0 var(--navy);color:var(--navy);white-space:nowrap}
+.sticker.s1{top:2%;left:-4%;background:var(--dough);transform:rotate(-8deg)}
+.sticker.s2{top:44%;right:-8%;background:var(--ice);transform:rotate(7deg)}
+@media (max-width:880px){
+  .hero-inner{grid-template-columns:1fr;padding-top:44px;padding-bottom:64px;gap:40px}
+  .hero-art{width:min(78%,340px)}
+  .sticker.s2{right:-4%}
+}
+
+/* ---------- Marquee ---------- */
+.marquee{background:var(--navy);color:var(--ice);border-block:3px solid var(--navy);overflow:hidden;white-space:nowrap}
+.marquee .track{display:inline-flex;animation:marquee 38s linear infinite}
+.marquee span{font:400 15px/1 var(--pixel);text-transform:uppercase;letter-spacing:.06em;padding:16px 0;display:inline-flex;align-items:center}
+.marquee span::after{content:"";width:10px;height:10px;background:var(--dough);margin:0 26px;border-radius:2px;transform:rotate(45deg)}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ---------- Sections ---------- */
+section.band{padding:96px 0}
+.kicker{display:inline-block;font:400 13px/1 var(--pixel);text-transform:uppercase;letter-spacing:.06em;color:var(--glaze);margin-bottom:14px}
+h2{font-size:clamp(34px,4.6vw,54px);font-weight:800;margin-bottom:18px}
+.section-head{display:flex;flex-wrap:wrap;gap:18px 30px;align-items:flex-end;justify-content:space-between;margin-bottom:36px}
+.section-head h2{margin:0}
+.section-head p{margin:10px 0 0;color:var(--ink-soft);max-width:34em}
+.two{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+@media (max-width:880px){.two{grid-template-columns:1fr;gap:36px}section.band{padding:72px 0}}
+.prose p{margin:0 0 16px;max-width:36em;color:var(--ink-soft)}
+.prose p strong{color:var(--ink)}
+
+.card{background:var(--surface);border:3px solid var(--line);box-shadow:6px 7px 0 var(--shadow);border-radius:16px}
+
+.server{overflow:hidden}
+.server-head{display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--sky);border-bottom:3px solid var(--line);color:#fff}
+.server-head img{width:52px;height:52px;filter:drop-shadow(2px 3px 0 var(--navy))}
+.server-head strong{display:block;font:800 22px/1.1 var(--display)}
+.server-head span{font:400 11px/1 var(--pixel);text-transform:uppercase;letter-spacing:.06em;color:#dcebff}
+.server dl{margin:0;padding:6px 0}
+.server .row{display:grid;grid-template-columns:130px 1fr;gap:12px;padding:14px 22px;border-bottom:2px dashed var(--hair)}
+.server .row:last-child{border-bottom:0}
+.server dt{font-weight:700;color:var(--ink-soft)}
+.server dd{margin:0;font-weight:800}
+@media (max-width:440px){.server .row{grid-template-columns:1fr;gap:2px}}
+
+/* hub / bento */
+.hub{background:var(--navy);color:#eaf2ff;border-block:3px solid #02081f;position:relative;overflow:hidden}
+.hub::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(127,227,255,.14) 2px,transparent 2px);background-size:26px 26px;mask-image:linear-gradient(90deg,transparent,#000 70%);-webkit-mask-image:linear-gradient(90deg,transparent,#000 70%);pointer-events:none}
+.hub .wrap{position:relative}
+.hub h2{color:#fff}
+.hub .kicker{color:var(--ice)}
+.hub .section-head p{color:#b9c8ee}
+.bento{display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:auto auto;gap:20px}
+.offer{padding:26px;border:3px solid #02081f;background:var(--navy-2);border-radius:18px;box-shadow:6px 7px 0 #02081f;display:flex;flex-direction:column;gap:10px;transition:transform .15s}
+.offer:hover{transform:translateY(-3px)}
+.offer.big{grid-row:span 2;background:linear-gradient(160deg,var(--glaze),#1747c9)}
+.offer h3{font-size:26px;color:#fff;margin-top:8px}
+.offer p{margin:0;color:#d4e0ff}
+.offer .ico{width:56px;height:56px;border-radius:14px;border:3px solid #02081f;display:grid;place-items:center;box-shadow:3px 4px 0 #02081f}
+.offer .ico svg{width:28px;height:28px;stroke:var(--navy);stroke-width:2.6}
+.lib-mini{display:grid;gap:10px;margin:14px 0 6px}
+.lib-mini a{display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(2,8,31,.35);border:2px solid rgba(127,227,255,.25);border-radius:12px;color:#fff;text-decoration:none;font-weight:700;transition:background .15s, border-color .15s}
+.lib-mini a:hover{background:rgba(2,8,31,.55);border-color:var(--ice)}
+.lib-mini a b{margin-left:auto;font:400 12px/1 var(--pixel);background:var(--ice);color:var(--navy);padding:5px 8px 4px;border-radius:99px}
+.lib-mini svg{color:var(--ice)}
+.offer.big .btn{margin-top:auto;align-self:flex-start}
+@media (max-width:760px){.bento{grid-template-columns:1fr}.offer.big{grid-row:auto}}
+
+/* CTA */
+.cta{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--sky),var(--glaze));color:#fff;padding:52px 44px;display:grid;grid-template-columns:auto 1fr auto;gap:30px;align-items:center;border-radius:22px}
+.cta img{width:110px;height:110px;border-radius:22px;border:3px solid var(--navy);box-shadow:4px 5px 0 var(--navy);transform:rotate(-6deg)}
+.cta h2{color:#fff;text-shadow:3px 3px 0 var(--navy);margin-bottom:8px;font-size:clamp(30px,4vw,44px)}
+.cta p{margin:0;color:#e3eeff;max-width:30em}
+.cta .ctas{justify-content:flex-end}
+@media (max-width:860px){.cta{grid-template-columns:1fr;padding:36px 24px;text-align:left}.cta .ctas{justify-content:flex-start}.cta img{width:80px;height:80px}}
+
+footer{padding:40px 0 48px;color:var(--ink-soft);font-size:15px;border-top:3px solid var(--hair)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:space-between}
+footer .fbrand{display:flex;align-items:center;gap:12px;font-weight:700;color:var(--ink)}
+footer .fbrand img{width:36px;height:36px;border-radius:9px;border:2px solid var(--line)}
+footer nav{display:flex;gap:18px;flex-wrap:wrap}
+footer nav a{text-decoration:none;font-weight:700}
+footer nav a:hover{text-decoration:underline;text-underline-offset:4px}
+
+/* ---------- Assets page ---------- */
+.page-head{position:relative;overflow:hidden;background:linear-gradient(170deg,var(--sky),var(--sky-deep));color:#fff;border-bottom:3px solid var(--navy);padding:56px 0 60px;isolation:isolate}
+.page-head .gridlines{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.07) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.07) 2px,transparent 2px);background-size:48px 48px}
+.page-head h1{font-size:clamp(42px,6vw,72px);text-shadow:3px 4px 0 var(--navy)}
+.page-head p{color:#e7f1ff;max-width:40em;margin:14px 0 28px;font-size:18px}
+.cat-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:860px}
+.cat-stat{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#fff;color:var(--navy);border:3px solid var(--navy);border-radius:14px;box-shadow:4px 5px 0 var(--navy);text-decoration:none;transition:transform .12s, box-shadow .12s}
+.cat-stat:hover{transform:translate(-1px,-2px);box-shadow:5px 7px 0 var(--navy)}
+.cat-stat .ico{width:42px;height:42px;border-radius:10px;border:3px solid var(--navy);display:grid;place-items:center;flex:none}
+.cat-stat strong{display:block;font:800 26px/1 var(--display)}
+.cat-stat div span{font-size:14px;font-weight:700;color:#44548a}
+@media (max-width:640px){
+  .cat-stats{gap:10px}
+  .cat-stat{flex-direction:column;align-items:flex-start;gap:8px;padding:10px 12px}
+  .cat-stat .ico{width:34px;height:34px}
+  .cat-stat strong{font-size:22px}
+  .cat-stat div span{font-size:12px;line-height:1.2}
+}
+
+.toolbar{position:sticky;top:calc(var(--header) + env(safe-area-inset-top,0px));z-index:20;background:color-mix(in srgb,var(--page) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:2px solid var(--hair)}
+.toolbar .wrap{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding-top:14px;padding-bottom:14px}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 6px 6px 2px;margin:-2px 0 -6px -2px;max-width:100%}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;display:inline-flex;align-items:center;gap:8px;font:800 15px/1 var(--body);padding:10px 14px;border:3px solid var(--line);border-radius:99px;background:var(--surface);color:var(--ink);cursor:pointer;text-decoration:none;transition:background .12s, transform .1s}
+.chip:hover{transform:translateY(-1px)}
+.chip .n{font:400 11px/1 var(--pixel);background:var(--page-2);color:var(--ink);border-radius:99px;padding:4px 7px 3px}
+.chip[aria-current="true"]{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:3px 4px 0 var(--ice)}
+.chip[aria-current="true"] .n{background:var(--ice);color:var(--navy)}
+.search{display:flex;align-items:center;gap:8px;background:var(--surface);border:3px solid var(--line);border-radius:99px;padding:0 8px 0 14px;margin-left:auto;flex:1 1 240px;max-width:340px}
+.search:focus-within{box-shadow:0 0 0 3px var(--ice)}
+.search input{border:0;background:transparent;color:var(--ink);font:500 16px var(--body);padding:10px 0;width:100%;outline:none;min-width:0}
+.search input::-webkit-search-cancel-button{display:none}
+.search .clear{border:0;background:var(--page-2);border-radius:99px;width:28px;height:28px;display:grid;place-items:center;cursor:pointer;flex:none}
+@media (max-width:640px){.search{max-width:none;margin-left:0}}
+
+.lib{padding-top:36px;padding-bottom:64px}
+.group{margin-bottom:52px}
+.group-head{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.group-head .ico{width:44px;height:44px;border-radius:12px;border:3px solid var(--line);display:grid;place-items:center;box-shadow:3px 4px 0 var(--shadow);color:var(--navy)}
+.group-head h2{font-size:clamp(26px,3.2vw,34px);margin:0}
+.group-head .count{font:400 12px/1 var(--pixel);color:var(--ink-soft);margin-top:4px;text-transform:uppercase;letter-spacing:.05em}
+.group-head .note{margin-left:auto;font-size:14px;color:var(--ink-soft);max-width:26em;text-align:right}
+@media (max-width:760px){.group-head{flex-wrap:wrap}.group-head .note{margin-left:0;text-align:left;flex-basis:100%}}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:22px}
+.grid.imgs{grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr))}
+
+/* category accents */
+.c-music{--accent:var(--glaze);--accent-bg:var(--ice)}
+.c-sfx{--accent:var(--dough-deep);--accent-bg:var(--dough)}
+.c-images{--accent:var(--glaze);--accent-bg:#b9d4ff}
+.ico.c-music,.ico.c-sfx,.ico.c-images{background:var(--accent-bg)}
+.ico svg{stroke:var(--navy)}
+
+/* sound card */
+.snd{padding:16px 16px 14px;display:flex;flex-direction:column;gap:14px;transition:transform .15s, box-shadow .15s, border-color .15s}
+.snd:hover{transform:translate(-2px,-2px);box-shadow:8px 9px 0 var(--shadow)}
+.snd.playing{box-shadow:6px 7px 0 var(--accent), 0 0 0 4px color-mix(in srgb,var(--accent-bg) 55%,transparent)}
+.snd-top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center}
+.pp{width:50px;height:50px;border-radius:50%;background:var(--accent-bg);border:3px solid var(--navy);color:var(--navy);display:grid;place-items:center;cursor:pointer;box-shadow:2px 3px 0 var(--navy);transition:transform .1s, box-shadow .1s}
+.pp:hover{transform:scale(1.06)}
+.pp:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--navy)}
+.pp svg{width:20px;height:20px;fill:currentColor;stroke:none}
+.pp .i-pause{display:none}
+.pp[aria-pressed="true"] .i-pause{display:block}
+.pp[aria-pressed="true"] .i-play{display:none}
+.snd h3{font-size:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.snd .by{font-size:14px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dur{font:400 13px/1 var(--pixel);color:var(--ink-soft);background:var(--page-2);padding:6px 8px 5px;border-radius:8px}
+.wave{position:relative;height:46px;cursor:pointer;border-radius:8px;touch-action:none}
+.wave .bars{position:absolute;inset:0;display:flex;align-items:center;gap:2px}
+.wave i{flex:1;height:calc(var(--h) * 100%);border-radius:2px;background:var(--wave);min-width:2px}
+.wave .fill{clip-path:inset(0 calc(100% - var(--p, 0%)) 0 0)}
+.wave .fill i{background:var(--accent)}
+.wave:hover .bars:not(.fill) i{background:color-mix(in srgb,var(--accent) 30%,transparent)}
+.wave .head{position:absolute;top:-3px;bottom:-3px;left:var(--p,0%);width:3px;background:var(--ink);border-radius:2px;opacity:0;transition:opacity .15s}
+.snd.playing .wave .head,.snd.started .wave .head{opacity:1}
+.snd-foot{display:flex;align-items:center;gap:10px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.tags span{font-size:12px;font-weight:800;padding:4px 9px;border-radius:99px;background:var(--page-2);color:var(--ink-soft)}
+.snd-foot .btn,.img-body .btn{margin-left:auto}
+
+/* image card */
+.imgc{overflow:hidden;display:flex;flex-direction:column;transition:transform .15s, box-shadow .15s}
+.imgc:hover{transform:translate(-2px,-2px);box-shadow:8px 9px 0 var(--shadow)}
+.img-prev{position:relative;aspect-ratio:4/3;border:0;border-bottom:3px solid var(--line);padding:22px;cursor:zoom-in;background:repeating-conic-gradient(var(--page-2) 0 25%,var(--surface) 0 50%) 0 0/22px 22px;display:grid;place-items:center;width:100%}
+.img-prev img{max-height:100%;object-fit:contain;filter:drop-shadow(4px 6px 0 rgba(10,28,82,.25));transition:transform .25s}
+.imgc:hover .img-prev img{transform:scale(1.04) rotate(-1deg)}
+.img-prev .zoom{position:absolute;right:12px;top:12px;width:36px;height:36px;border-radius:10px;background:var(--surface);border:2px solid var(--line);display:grid;place-items:center;opacity:0;transition:opacity .15s}
+.imgc:hover .zoom,.img-prev:focus-visible .zoom{opacity:1}
+.img-body{padding:16px;display:flex;flex-direction:column;gap:10px}
+.img-body h3{font-size:19px}
+.img-body .meta{font-size:14px;color:var(--ink-soft);font-weight:600}
+.img-body .row{display:flex;align-items:center;gap:10px}
+
+.empty{padding:48px 24px;text-align:center;grid-column:1/-1}
+.empty h3{font-size:26px}
+.empty p{color:var(--ink-soft);margin:8px 0 20px}
+.submit{padding:30px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;margin-bottom:72px;background:linear-gradient(135deg,var(--surface),var(--surface-2))}
+.submit h3{font-size:28px}
+.submit p{margin:6px 0 0;color:var(--ink-soft)}
+
+/* ---------- Creators ---------- */
+.creators{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:22px}
+.creator{overflow:hidden;display:flex;flex-direction:column;transition:transform .15s, box-shadow .15s}
+.creator:hover{transform:translate(-2px,-2px);box-shadow:8px 9px 0 var(--shadow)}
+.creator-art{position:relative;height:240px;background:radial-gradient(circle at 50% 115%,rgba(127,227,255,.6),transparent 60%),linear-gradient(170deg,var(--sky),var(--sky-deep));border-bottom:3px solid var(--line);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;isolation:isolate}
+.creator-art::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.08) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.08) 2px,transparent 2px);background-size:32px 32px}
+.creator-art .body{height:210px;width:auto;margin-bottom:-4px;filter:drop-shadow(6px 8px 0 rgba(10,28,82,.45));transition:transform .25s}
+.creator:hover .creator-art .body{transform:translateY(-6px) rotate(-2deg)}
+.creator-art .role{position:absolute;left:12px;top:12px;font:400 11px/1 var(--pixel);text-transform:uppercase;letter-spacing:.05em;background:var(--navy);color:var(--ice);padding:7px 9px 6px;border-radius:99px}
+.creator-art .role.owner{background:var(--dough);color:var(--navy)}
+.creator-body{padding:16px;display:flex;flex-direction:column;gap:14px;flex:1}
+.creator-name{display:flex;align-items:center;gap:12px;min-width:0}
+.creator-name img{width:36px;height:36px;border-radius:8px;border:2px solid var(--line);image-rendering:pixelated;flex:none}
+.creator-id{min-width:0}
+.creator-name h3{font-size:22px;overflow:hidden;text-overflow:ellipsis}
+.creator-id span{display:block;font:400 11px/1.4 var(--pixel);color:var(--ink-soft);letter-spacing:.03em}
+.creator-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.btn.busy{opacity:.6;pointer-events:none}
+.skin-fallback{display:grid;place-items:center;height:100%;color:#fff;font:400 12px/1 var(--pixel);text-transform:uppercase}
+
+.crew{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,160px),1fr));gap:16px}
+.crew a{display:flex;align-items:center;gap:12px;padding:12px;background:var(--surface);border:3px solid var(--line);border-radius:14px;box-shadow:4px 5px 0 var(--shadow);text-decoration:none;font-weight:800;transition:transform .12s, box-shadow .12s;min-width:0}
+.crew a:hover{transform:translate(-1px,-2px);box-shadow:5px 7px 0 var(--shadow)}
+.crew img{width:44px;height:44px;flex:none;image-rendering:pixelated;filter:drop-shadow(2px 3px 0 rgba(10,28,82,.3))}
+.crew span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fine{font-size:14px;color:var(--ink-soft);margin:22px 0 0}
+.fine a{font-weight:700}
+
+/* ---------- Now playing bar ---------- */
+.player{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--navy);color:#fff;border-top:3px solid #02081f;padding-bottom:env(safe-area-inset-bottom,0px);animation:up .25s ease-out;box-shadow:0 -6px 0 rgba(10,28,82,.15)}
+@keyframes up{from{transform:translateY(100%)}}
+.player .wrap{display:grid;grid-template-columns:auto minmax(0,220px) 1fr auto auto auto;gap:16px;align-items:center;padding-top:12px;padding-bottom:12px}
+.player .pp{width:44px;height:44px;--accent-bg:var(--ice)}
+.pb-info{min-width:0}
+.pb-info strong{display:block;font:800 16px/1.2 var(--display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pb-info span{font:400 11px/1 var(--pixel);text-transform:uppercase;letter-spacing:.05em;color:var(--ice)}
+.pb-track{position:relative;height:12px;border-radius:99px;background:rgba(127,227,255,.2);cursor:pointer;touch-action:none}
+.pb-track .fill{position:absolute;inset:0 auto 0 0;width:var(--p,0%);background:var(--ice);border-radius:99px}
+.pb-track .fill::after{content:"";position:absolute;right:-8px;top:50%;width:16px;height:16px;margin-top:-8px;border-radius:50%;background:#fff;border:3px solid var(--navy)}
+.pb-time{font:400 12px/1 var(--pixel);color:#cfe0ff;white-space:nowrap}
+.player .icon-btn{color:#fff}
+.player .btn-sm{--sh:#02081f;--bd:#02081f}
+@media (max-width:760px){
+  .player .wrap{grid-template-columns:auto minmax(0,1fr) auto auto;gap:10px 12px}
+  .pb-track{grid-column:1/-1;grid-row:2}
+  .pb-time{display:none}
+  .player .btn-sm .lbl{display:none}
+}
+
+/* ---------- Lightbox ---------- */
+dialog.lightbox{border:3px solid var(--line);border-radius:20px;padding:0;background:var(--surface);color:var(--ink);box-shadow:10px 12px 0 var(--shadow);width:min(92vw,720px);max-height:90vh;overflow:auto}
+dialog.lightbox::backdrop{background:rgba(5,13,43,.7);backdrop-filter:blur(4px)}
+dialog.lightbox[open]{animation:pop .22s cubic-bezier(.2,1.3,.4,1)}
+@keyframes pop{from{transform:scale(.92);opacity:0}}
+.lb-img{background:repeating-conic-gradient(var(--page-2) 0 25%,var(--surface) 0 50%) 0 0/24px 24px;padding:28px;display:grid;place-items:center;border-bottom:3px solid var(--line)}
+.lb-img img{max-height:60vh;object-fit:contain}
+.lb-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;padding:18px 20px}
+.lb-foot h3{font-size:22px}
+.lb-foot p{margin:2px 0 0;font-size:14px;color:var(--ink-soft);font-weight:600}
+.lb-foot .acts{margin-left:auto;display:flex;gap:10px}
+.lb-foot .icon-btn{border:3px solid var(--line)}
+
+dialog.lightbox.dark .lb-img{background:radial-gradient(circle at 50% 40%,#1f3f95,#0a1c52)}
+
+/* ---------- Animations, stickers, packs ---------- */
+.c-animations{--accent:var(--glaze);--accent-bg:#ffb3c7}
+.c-stickers{--accent:var(--glaze);--accent-bg:#ffe27a}
+.c-packs{--accent:var(--glaze);--accent-bg:#c7f0c2}
+.ico.c-animations,.ico.c-stickers,.ico.c-packs{background:var(--accent-bg)}
+.anim-prev{position:relative;aspect-ratio:16/10;border-bottom:3px solid var(--line);background:repeating-conic-gradient(var(--page-2) 0 25%,var(--surface) 0 50%) 0 0/22px 22px;display:grid;place-items:center;overflow:hidden}
+.anim-prev video,.anim-prev canvas{max-width:88%;max-height:84%;width:auto;height:auto;display:block}
+.badge{position:absolute;left:10px;top:10px;font:400 11px/1 var(--pixel);text-transform:uppercase;letter-spacing:.04em;background:var(--navy);color:var(--ice);padding:6px 8px 5px;border-radius:99px}
+.badge.cfg{background:var(--dough);color:var(--navy)}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto;justify-content:flex-end}
+.img-body .row{flex-wrap:wrap}
+.pack-prev{position:relative;aspect-ratio:16/9;border-bottom:3px solid var(--line);overflow:hidden;background:var(--navy)}
+.pack-prev img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.imgc:hover .pack-prev img{transform:scale(1.05)}
+.grid.stks{grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:16px}
+.stk{overflow:hidden;display:flex;flex-direction:column;border-radius:14px;box-shadow:4px 5px 0 var(--shadow);transition:transform .15s, box-shadow .15s}
+.stk:hover{transform:translate(-2px,-2px);box-shadow:6px 7px 0 var(--shadow)}
+.stk-prev{aspect-ratio:1;border:0;border-bottom:3px solid var(--line);width:100%;padding:14px;cursor:zoom-in;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,#1f3f95,#0a1c52)}
+.stk-prev img{max-height:100%;object-fit:contain;transition:transform .2s}
+.stk:hover .stk-prev img{transform:scale(1.08)}
+.stk-foot{display:flex;align-items:center;gap:6px;padding:8px 8px 8px 12px}
+.stk-foot span{font-weight:800;font-size:14px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dl-mini{width:36px;height:36px;border-radius:9px;border:2px solid var(--line);background:var(--ice);color:var(--navy);display:grid;place-items:center;flex:none;box-shadow:2px 3px 0 var(--shadow);transition:transform .1s}
+.dl-mini:hover{transform:translate(-1px,-1px)}
+
+/* configurator */
+dialog.cfg{width:min(94vw,1000px)}
+.cfg-grid{display:grid;grid-template-columns:1.35fr 1fr}
+.cfg-prev{background:repeating-conic-gradient(var(--page-2) 0 25%,var(--surface) 0 50%) 0 0/24px 24px;display:grid;place-items:center;padding:24px;border-right:3px solid var(--line);min-height:340px}
+.cfg-prev.green{background:#00ff00}
+.cfg-prev canvas{max-width:100%;max-height:56vh;width:auto;height:auto}
+.cfg-side{padding:22px;display:flex;flex-direction:column;gap:16px}
+.cfg-side h3{font-size:28px}
+.cfg-side p{margin:6px 0 0;color:var(--ink-soft);font-size:14px}
+.cfg-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:14px}
+.field.wide{grid-column:1/-1}
+.field input,.field select{font:500 16px var(--body);color:var(--ink);background:var(--surface);border:3px solid var(--line);border-radius:10px;padding:10px 12px;width:100%;min-width:0}
+.field input:focus,.field select:focus{outline:none;box-shadow:0 0 0 3px var(--ice)}
+.field input[type=color]{padding:4px;height:48px;cursor:pointer}
+.cfg-progress{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:var(--ink-soft)}
+.progress{height:14px;border-radius:99px;background:var(--page-2);overflow:hidden;border:2px solid var(--line)}
+.progress i{display:block;height:100%;width:0;background:var(--glaze)}
+.cfg-actions{display:flex;gap:10px;align-items:center;margin-top:auto}
+.cfg-actions .icon-btn{border:3px solid var(--line);margin-left:auto}
+@media (max-width:760px){.cfg-grid{grid-template-columns:1fr}.cfg-prev{border-right:0;border-bottom:3px solid var(--line);min-height:200px}}
+
+/* ---------- Toast ---------- */
+.toast{position:fixed;left:50%;bottom:calc(20px + var(--player-h) + env(safe-area-inset-bottom,0px));transform:translate(-50%,160%);display:flex;align-items:center;gap:10px;background:var(--navy);color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;border:3px solid #02081f;box-shadow:4px 5px 0 #02081f;transition:transform .28s cubic-bezier(.2,1.3,.4,1), opacity .2s, visibility .2s;z-index:50;max-width:calc(100vw - 32px);opacity:0;visibility:hidden}
+.toast svg{color:var(--ice)}
+.toast.show{transform:translate(-50%,0);opacity:1;visibility:visible}
+
+/* ---------- Reveal ---------- */
+.js [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1)}
+.js [data-reveal].in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js [data-reveal]{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.2-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4.5" height="14" rx="1.2"/><rect x="13.5" y="5" width="4.5" height="14" rx="1.2"/></symbol>
+  <symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4.5 4.5"/></symbol>
+  <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m4 18 5-5 3.5 3.5L15 14l5 5"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5.5h16v10.5H11l-4.5 3.5V16H4z"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24"><circle cx="8.5" cy="8.5" r="3"/><circle cx="16" cy="8.5" r="3"/><path d="M3 19c.6-3.4 2.8-5 5.5-5s4.9 1.6 5.5 5M13 14.3c.9-.2 1.9-.3 3-.3 2.7 0 4.9 1.6 5.5 5"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 8.5V6a1.5 1.5 0 0 0-1.5-1.5H6A1.5 1.5 0 0 0 4.5 6v8A1.5 1.5 0 0 0 6 15.5h2.5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+  <symbol id="i-film" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M3.5 9.5h17M3.5 14.5h17M8 5v4.5M8 14.5V19M16 5v4.5M16 14.5V19"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M3.5 8 12 3.5 20.5 8v8L12 20.5 3.5 16z"/><path d="M3.5 8 12 12.5 20.5 8M12 12.5v8"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M4.3 5.8l2.1 2.1M17.6 16.1l2.1 2.1M2.5 12h3M18.5 12h3M4.3 18.2l2.1-2.1M17.6 7.9l2.1-2.1"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4.5h5.5V10M19.5 4.5 11 13M17 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 4 18.5v-10A1.5 1.5 0 0 1 5.5 7H10"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></symbol>
+</svg>
+
+<header class="top" id="top">
+  <div class="wrap nav">
+    <a class="brand" href="#home"><img src="assets/images/donut_creators_hub_logo.png" alt="" width="42" height="42"><span>Donut Creators Hub</span></a>
+    <nav aria-label="Main">
+      <a href="#home" data-link="home">Home</a>
+      <a href="#assets" data-link="assets">Assets <span class="pill" data-count="all"></span></a>
+      <a href="#creators" data-link="creators">Creators</a>
+    </nav>
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">
+      <svg class="i theme-light-icon"><use href="#i-moon"/></svg>
+      <svg class="i theme-dark-icon"><use href="#i-sun"/></svg>
+    </button>
+    <a class="btn btn-sm btn-white discord-top js-discord" href="#" target="_blank" rel="noopener"><svg class="i"><use href="#i-chat"/></svg>Join Discord</a>
+  </div>
+</header>
+
+<main>
+<!-- ================= HOME ================= -->
+<div id="page-home">
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"><div class="gridlines"></div><div id="cubes"></div></div>
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow"><img src="assets/images/donutsmp_logo.webp" alt="">For DonutSMP creators</span>
+        <h1>Make better DonutSMP content, <span class="hl">together.</span></h1>
+        <p class="lead">Donut Creators Hub is a Discord and website for people who make videos, shorts and streams on DonutSMP. Grab free assets, get feedback on your uploads and find people to collab with.</p>
+        <div class="ip">
+          <img src="assets/images/donutsmp_logo.webp" alt="" width="44" height="44">
+          <div class="ip-text"><span class="ip-label">Server IP</span><span class="ip-value">donutsmp.net</span></div>
+          <button class="btn btn-sm" type="button" id="copyIp" aria-label="Copy server IP donutsmp.net"><svg class="i" id="copyIcon"><use href="#i-copy"/></svg><span id="copyState">Copy</span></button>
+        </div>
+        <div class="ctas">
+          <a class="btn btn-dough" href="#assets">Browse assets <svg class="i"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-white js-discord" href="#" target="_blank" rel="noopener"><svg class="i"><use href="#i-chat"/></svg>Join the Discord</a>
+        </div>
+        <ul class="hero-stats">
+          <li><b data-count="all"></b> free assets</li>
+          <li><b>Java</b> + Bedrock</li>
+          <li><b>1.20</b>+ supported</li>
+        </ul>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-card"><img src="assets/images/donut_creators_hub_logo.png" alt="" width="800" height="800"></div>
+        <img class="art-donut" src="assets/images/donutsmp_logo.webp" alt="">
+        <span class="sticker s1">Free assets</span>
+        <span class="sticker s2"><span data-count="all"></span> files</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="track" id="marquee"></div></div>
+
+  <section class="band">
+    <div class="wrap two">
+      <div class="prose" data-reveal>
+        <span class="kicker">The server</span>
+        <h2>What is DonutSMP?</h2>
+        <p>DonutSMP is one of the biggest Minecraft survival servers around. You start with nothing and <strong>grind for loot, money and gear</strong>, then fight other players to climb to the top.</p>
+        <p>There are almost no safe zones: <strong>griefing, stealing and PvP are all allowed</strong>, which is exactly why it makes such good content. Every base raid, crate opening and comeback is a story waiting to be recorded.</p>
+        <p>You can join from Java or Bedrock using the same address, on any modern version from 1.20 up.</p>
+      </div>
+      <div class="card server" data-reveal>
+        <div class="server-head">
+          <img src="assets/images/donutsmp_logo.webp" alt="" width="52" height="52">
+          <div><span>Server card</span><strong>DonutSMP</strong></div>
+        </div>
+        <dl>
+          <div class="row"><dt>Server IP</dt><dd>donutsmp.net</dd></div>
+          <div class="row"><dt>Editions</dt><dd>Java and Bedrock</dd></div>
+          <div class="row"><dt>Versions</dt><dd>1.20 and newer</dd></div>
+          <div class="row"><dt>Gameplay</dt><dd>Survival, economy, PvP</dd></div>
+          <div class="row"><dt>Rules</dt><dd>Griefing and stealing allowed</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="band hub">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <div>
+          <span class="kicker">The hub</span>
+          <h2>What is Donut Creators Hub?</h2>
+          <p>A home base for DonutSMP creators, whether you're posting your first short or already have an audience. The Discord is where the community talks; this website is where the shared asset library lives.</p>
+        </div>
+      </div>
+      <div class="bento">
+        <div class="offer big" data-reveal>
+          <div class="ico" style="background:var(--ice)"><svg class="i"><use href="#i-music"/></svg></div>
+          <h3>Free asset library</h3>
+          <p>Animations, music, sound effects, images and stickers for DonutSMP content. Preview anything, download it and drop it straight into your edit.</p>
+          <div class="lib-mini" id="libMini"></div>
+          <a class="btn" href="#assets">Open the library <svg class="i"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="offer" data-reveal>
+          <div class="ico" style="background:var(--dough)"><svg class="i"><use href="#i-chat"/></svg></div>
+          <h3>Feedback on your videos</h3>
+          <p>Share a thumbnail, title or rough cut and get honest notes from other creators before you post.</p>
+        </div>
+        <div class="offer" data-reveal>
+          <div class="ico" style="background:#b9d4ff"><svg class="i"><use href="#i-people"/></svg></div>
+          <h3>Collabs and teams</h3>
+          <p>Find people to film with, team up for a series or split the work between editors, thumbnail makers and players.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <div>
+          <span class="kicker">From the library</span>
+          <h2>Press play on a few</h2>
+          <p>Every sound can be previewed right here. Click the waveform to skip around, then download what you like.</p>
+        </div>
+        <a class="btn btn-white" href="#assets">See all <span data-count="all"></span> assets <svg class="i"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="grid" id="featured"></div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <div>
+          <span class="kicker">On the server</span>
+          <h2>DonutSMP creators</h2>
+          <p>Some of the biggest names making DonutSMP content. Grab their skins or find their videos and streams.</p>
+        </div>
+        <a class="btn btn-white" href="#creators">See creators <svg class="i"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="crew" id="crew"></div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <div class="card cta" data-reveal>
+        <img src="assets/images/donut_creators_hub_logo.png" alt="" width="110" height="110">
+        <div>
+          <h2>Your next upload starts here.</h2>
+          <p>Join the Discord to share clips, ask for feedback and suggest new assets for the library.</p>
+        </div>
+        <div class="ctas">
+          <a class="btn btn-dough js-discord" href="#" target="_blank" rel="noopener"><svg class="i"><use href="#i-chat"/></svg>Join the Discord</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= ASSETS ================= -->
+<div id="page-assets" hidden>
+  <div class="page-head">
+    <div class="gridlines" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Asset library</h1>
+      <p>Free animations, music, sound effects, images and stickers for your DonutSMP videos. Preview anything before you download it, or set up your own money counters, countdowns and name bars.</p>
+      <div class="cat-stats" id="catStats"></div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="wrap">
+      <div class="chips" id="chips" aria-label="Filter by category"></div>
+      <label class="search">
+        <svg class="i"><use href="#i-search"/></svg>
+        <input id="q" type="search" placeholder="Search sounds, tags, images" aria-label="Search assets" autocomplete="off">
+        <button class="clear" id="clearQ" type="button" aria-label="Clear search" hidden><svg class="i" style="width:14px;height:14px"><use href="#i-x"/></svg></button>
+      </label>
+    </div>
+  </div>
+
+  <div class="wrap lib">
+    <div id="library"></div>
+    <div class="card submit">
+      <div>
+        <h3>Made something others could use?</h3>
+        <p>Post it in the Discord and it can be added to the library.</p>
+      </div>
+      <a class="btn btn-dough js-discord" href="#" target="_blank" rel="noopener"><svg class="i"><use href="#i-chat"/></svg>Share in Discord</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= CREATORS ================= -->
+<div id="page-creators" hidden>
+  <div class="page-head">
+    <div class="gridlines" aria-hidden="true"></div>
+    <div class="wrap">
+      <h1>Creators</h1>
+      <p>DonutSMP streamers and YouTubers worth watching. Download a skin to use in your thumbnails, or find their channels for inspiration.</p>
+    </div>
+  </div>
+  <div class="wrap lib">
+    <div class="creators" id="creatorGrid"></div>
+    <p class="fine">Skins load live from <a href="https://mc-heads.net" target="_blank" rel="noopener">MCHeads</a>, so they update when a creator changes theirs. Clips and profile pictures belong to each creator, so we link to their channels instead of hosting them.</p>
+    <div class="card submit" style="margin-top:36px">
+      <div>
+        <h3>Make DonutSMP content?</h3>
+        <p>Post your channel in the Discord to get added to this page.</p>
+      </div>
+      <a class="btn btn-dough js-discord" href="#" target="_blank" rel="noopener"><svg class="i"><use href="#i-chat"/></svg>Get featured</a>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fbrand"><img src="assets/images/donut_creators_hub_logo.png" alt="" width="36" height="36">Donut Creators Hub</div>
+    <nav aria-label="Footer">
+      <a href="#home">Home</a>
+      <a href="#assets">Assets</a>
+      <a href="#creators">Creators</a>
+      <a href="#" class="js-discord" target="_blank" rel="noopener">Discord</a>
+    </nav>
+    <span>Not affiliated with DonutSMP. Join the server at donutsmp.net.</span>
+  </div>
+</footer>
+
+<!-- Now playing -->
+<div class="player" id="player" hidden>
+  <div class="wrap">
+    <button class="pp" id="pbToggle" type="button" aria-pressed="false" aria-label="Play">
+      <svg class="i-play"><use href="#i-play"/></svg><svg class="i-pause"><use href="#i-pause"/></svg>
+    </button>
+    <div class="pb-info"><span id="pbCat"></span><strong id="pbTitle"></strong></div>
+    <div class="pb-track" id="pbTrack" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="fill"></div></div>
+    <span class="pb-time" id="pbTime">0:00 / 0:00</span>
+    <a class="btn btn-sm" id="pbDl" href="#" download><svg class="i"><use href="#i-dl"/></svg><span class="lbl">Download</span></a>
+    <button class="icon-btn" id="pbClose" type="button" aria-label="Stop and close player"><svg class="i"><use href="#i-x"/></svg></button>
+  </div>
+</div>
+
+<dialog class="lightbox" id="lightbox" aria-labelledby="lbTitle">
+  <div class="lb-img"><img id="lbImg" alt=""></div>
+  <div class="lb-foot">
+    <div><h3 id="lbTitle"></h3><p id="lbMeta"></p></div>
+    <div class="acts">
+      <a class="btn btn-sm" id="lbDl" href="#" download><svg class="i"><use href="#i-dl"/></svg>Download</a>
+      <button class="icon-btn" id="lbClose" type="button" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="lightbox cfg" id="cfg" aria-labelledby="cfgTitle">
+  <div class="cfg-grid">
+    <div class="cfg-prev" id="cfgPrev"><canvas id="cfgCanvas" role="img" aria-label="Live preview"></canvas></div>
+    <div class="cfg-side">
+      <div>
+        <h3 id="cfgTitle"></h3>
+        <p id="cfgMeta"></p>
+      </div>
+      <div class="cfg-fields" id="cfgFields"></div>
+      <label class="field" id="cfgBgWrap" for="cfgBg">Background
+        <select id="cfgBg">
+          <option value="transparent">Transparent (WebM)</option>
+          <option value="#00ff00">Green screen (MP4)</option>
+        </select>
+      </label>
+      <div class="cfg-progress" id="cfgProgress" hidden>
+        <div class="progress"><i></i></div>
+        <span>Recording, keep this tab open</span>
+      </div>
+      <div class="cfg-actions">
+        <button class="btn" type="button" id="cfgGo"></button>
+        <button class="icon-btn" type="button" id="cfgClose" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><svg class="i"><use href="#i-check"/></svg><span></span></div>
+
+<script src="https://cdn.jsdelivr.net/npm/fix-webm-duration@1.0.6/fix-webm-duration.min.js" defer></script>
+<script src="assets/js/animations.js"></script>
+<script>
+/* ================= Edit these ================= */
+const DISCORD_URL = "";  // e.g. "https://discord.gg/yourinvite"
+const SERVER_IP = "donutsmp.net";
+
+// Every asset in the library. Drop a file into assets/ and add a line here.
+// cat: "animations" | "music" | "sfx" | "images" | "stickers" | "packs"
+// file: path relative to this page   size: bytes (shown on the card)
+// anim: key in assets/js/animations.js. With config:true there's no file; people set it up and it renders in their browser.
+const LIBRARY = [
+  // Animations (transparent WebM)
+  { cat:"animations", file:"assets/animations/subscribe-pop.webm", anim:"subscribe", title:"Subscribe pop", tags:["overlay","subscribe"], size:1534305, secs:4 },
+  { cat:"animations", file:"assets/animations/donut-drop-intro.webm", anim:"donut", title:"Donut drop intro", tags:["intro","logo"], size:2215380, secs:3 },
+  { cat:"animations", file:"assets/animations/live-badge.webm", anim:"live", loops:2, title:"LIVE badge", tags:["overlay","stream","loop"], size:2084728, secs:4 },
+  { cat:"animations", file:"assets/animations/bouncing-arrow.webm", anim:"arrow", loops:3, title:"Bouncing arrow", tags:["pointer","loop"], size:2252276, secs:3.6 },
+  { cat:"animations", file:"assets/animations/circle-highlight.webm", anim:"circle", title:"Circle highlight", tags:["pointer","highlight"], size:145799, secs:1.8 },
+  { cat:"animations", anim:"money", config:true, title:"Money counter", tags:["economy","text"] },
+  { cat:"animations", anim:"countdown", config:true, title:"Countdown", tags:["timer","intro"] },
+  { cat:"animations", anim:"lowerThird", config:true, title:"Lower third", tags:["overlay","name"] },
+
+  // Music
+  { cat:"music", file:"assets/music/1-22. Steam Gardens.mp3", title:"Steam Gardens", tags:["chill","game"], size:7807384 },
+  { cat:"music", file:"assets/music/31. DK Summit.mp3", title:"DK Summit", tags:["upbeat","game"], size:3949221 },
+  { cat:"music", file:"assets/music/004_-_Rankings.mp3", title:"Rankings", tags:["upbeat","results"], size:2731365 },
+  { cat:"music", file:"assets/music/Mii Channel [Light Music Remix].mp3", title:"Mii Channel", by:"Light Music Remix", tags:["chill","funny"], size:3719137 },
+  { cat:"music", file:"assets/music/Racing Hearts - Mattie Maguire (youtube).mp3", title:"Racing Hearts", by:"Mattie Maguire", tags:["upbeat","montage"], size:7204571 },
+  { cat:"music", file:"assets/music/Sneaky Pete - Lennon Hutton (youtube).mp3", title:"Sneaky Pete", by:"Lennon Hutton", tags:["sneaky","funny"], size:8026906 },
+  { cat:"music", file:"assets/music/We're Finally Landing - Home.mp3", title:"We're Finally Landing", by:"Home", tags:["chill","synthwave"], size:4352803 },
+  { cat:"music", file:"assets/music/Vsauce_moon.mp3", title:"Vsauce Moon", tags:["suspense","meme"], size:1491215 },
+
+  // Sound effects
+  { cat:"sfx", file:"assets/music/AH HELL NAH.mp3", title:"Ah Hell Nah", tags:["meme","reaction"], size:173670 },
+  { cat:"sfx", file:"assets/music/Anime wow sound effect.mp3", title:"Anime Wow", tags:["meme","reaction"], size:171500 },
+  { cat:"sfx", file:"assets/music/Awkward #4.mp3", title:"Awkward", tags:["awkward","meme"], size:28140 },
+  { cat:"sfx", file:"assets/music/Awkward Pause 02.mp3", title:"Awkward Pause", tags:["awkward","silence"], size:67754 },
+  { cat:"sfx", file:"assets/music/Bass  Drop.mp3", title:"Bass Drop", tags:["impact","hype"], size:169075 },
+  { cat:"sfx", file:"assets/music/bassdrop.mp3", title:"Bass Drop (Alt)", tags:["impact","hype"], size:209815 },
+  { cat:"sfx", file:"assets/music/Bing (1).mp3", title:"Bing", tags:["ui","ding"], size:25021 },
+  { cat:"sfx", file:"assets/music/BLEEP.mp3", title:"Censor Bleep", tags:["censor"], size:26206 },
+  { cat:"sfx", file:"assets/music/bone-crack.mp3", title:"Bone Crack", tags:["impact","pvp"], size:17900 },
+  { cat:"sfx", file:"assets/music/BRUH.mp3", title:"Bruh", tags:["meme","reaction"], size:14061 },
+  { cat:"sfx", file:"assets/music/Cinematic Boom.mp3", title:"Cinematic Boom", tags:["impact","intro"], size:43485 },
+  { cat:"sfx", file:"assets/music/error-made-with-Voicemod.mp3", title:"Error", tags:["fail","meme"], size:16348 },
+  { cat:"sfx", file:"assets/music/Lego Build.mp3", title:"Lego Build", tags:["building"], size:58860 },
+  { cat:"sfx", file:"assets/music/Level Up.mp3", title:"Level Up", tags:["win","ui"], size:30529 },
+
+  // Images
+  { cat:"images", file:"assets/images/donut_creators_hub_logo.png", title:"Donut Creators Hub logo", tags:["logo","branding"], size:202009 },
+  { cat:"images", file:"assets/images/donutsmp_logo.webp", title:"DonutSMP donut", tags:["logo","thumbnail"], size:30860 },
+  { cat:"images", file:"assets/images/donut-glaze-background.png", title:"Donut glaze background", tags:["thumbnail","background"], size:540137 },
+  { cat:"images", file:"assets/images/sunburst-background.png", title:"Sunburst background", tags:["thumbnail","background"], size:2359568 },
+  { cat:"images", file:"assets/images/vs-frame.png", title:"VS frame", tags:["thumbnail","overlay","pvp"], size:122512 },
+  { cat:"images", file:"assets/images/red-arrow.png", title:"Red arrow", tags:["thumbnail","sticker"], size:46962 },
+  { cat:"images", file:"assets/images/red-circle.png", title:"Red circle", tags:["thumbnail","sticker"], size:65493 },
+  { cat:"images", file:"assets/images/subscribe-button.png", title:"Subscribe button", tags:["sticker","subscribe"], size:30891 },
+  { cat:"images", file:"assets/images/live-badge.png", title:"LIVE badge", tags:["sticker","stream"], size:21666 },
+  { cat:"images", anim:"textSticker", config:true, title:"Text sticker maker", tags:["thumbnail","text"] },
+
+  // Stickers (Kenney, CC0)
+  ...[
+    ["particles","sparkle"],["particles","glint"],["particles","cross-flare"],["particles","glow-star"],["particles","magic-target"],
+    ["particles","ring"],["particles","shockwave"],["particles","lightning-burst"],["particles","lightning-bolt"],["particles","impact"],
+    ["particles","claw-scratch"],["particles","sword-slash"],["particles","muzzle-flash"],["particles","smoke-ring"],["particles","swoosh"],
+    ["smoke","explosion"],["smoke","explosion-2"],["smoke","fire-flash"],["smoke","black-smoke"],["smoke","white-puff"],["smoke","stink-cloud"],
+    ["emotes","exclamation"],["emotes","double-exclamation"],["emotes","question"],["emotes","heart"],["emotes","broken-heart"],["emotes","anger"],
+    ["emotes","idea"],["emotes","laugh"],["emotes","cash"],["emotes","cross"],["emotes","dizzy"],["emotes","sleeping"],
+    ["emotes","angry-face"],["emotes","happy-face"],["emotes","confused"],["emotes","music"]
+  ].map(([kind,n])=>({ cat:"stickers", file:`assets/stickers/${kind}/${n}.png`, title:n.replace(/-/g," ").replace(/^./,c=>c.toUpperCase()),
+      tags:[kind.replace(/s$/,""),"kenney"], by:"Kenney" })),
+
+  // Full packs (Kenney, CC0)
+  { cat:"packs", file:"assets/packs/kenney-particle-pack.zip", preview:"assets/packs/kenney-particle-pack.png", title:"Particle Pack", count:"80 PNGs + black-background versions", tags:["particles","kenney"], size:15001764 },
+  { cat:"packs", file:"assets/packs/kenney-smoke-particles.zip", preview:"assets/packs/kenney-smoke-particles.png", title:"Smoke Particles", count:"77 PNGs", tags:["smoke","explosion","kenney"], size:6019666 },
+  { cat:"packs", file:"assets/packs/kenney-emotes-pack.zip", preview:"assets/packs/kenney-emotes-pack.png", title:"Emotes Pack", count:"480 emotes, 8 styles", tags:["emotes","pixel","kenney"], size:380191 },
+  { cat:"packs", file:"assets/packs/kenney-game-icons.zip", preview:"assets/packs/kenney-game-icons.png", title:"Game Icons", count:"105 icons, black and white", tags:["icons","kenney"], size:1045980 }
+];
+
+// Shown on the home page under "Press play on a few"
+const FEATURED = ["Level Up", "Bruh", "Cinematic Boom", "Sneaky Pete"];
+
+// Creators page. uuid = Minecraft account ID (look it up on namemc.com); skins load live from mc-heads.net.
+// ign = in-game name, shown under the display name when it differs.
+// Add youtube/twitch links to show direct buttons; without them the card links to a YouTube search.
+const CREATORS = [
+  { name:"DrDonut",  ign:"DrDonutt", uuid:"cda39dac068246f5b409c57dc244cb85", role:"Server owner" },
+  { name:"Evify",    uuid:"179cc67c80fd4d09b27b6ae23bf25059", role:"Streamer" },
+  { name:"Jesticc",  uuid:"710b92b760ce43a4b1628317ebb6e55e", role:"Streamer" },
+  { name:"Farex_x",  uuid:"995f0294c0914481b9f160b7727e4282", role:"Streamer" },
+  { name:"Wizox",    ign:"W1zoX_",   uuid:"9b60ab8d4c764695a98adfbfac2c71c0", role:"Streamer" },
+  { name:"Jettism",  uuid:"7694e6a9b44e4afb879a3116d0643816", role:"Streamer" }
+];
+/* ============================================== */
+
+const CATS = {
+  animations: { label:"Animations", one:"animation", icon:"i-film",
+            note:"Transparent WebM videos. Use Green screen if your editor can't open WebM. Configurable ones render in your browser, so use Chrome or Edge." },
+  music:  { label:"Music", one:"track", icon:"i-music",
+            note:"Some tracks are from games or other creators and may get Content ID claims on YouTube." },
+  sfx:    { label:"Sound effects", one:"sound", icon:"i-bolt" },
+  images: { label:"Images", one:"image", icon:"i-image" },
+  stickers: { label:"Stickers", one:"sticker", icon:"i-star",
+            note:"Particles, smoke and emotes by Kenney (kenney.nl), public domain. Click one to see it bigger." },
+  packs:  { label:"Full packs", one:"pack", icon:"i-box",
+            note:"The complete Kenney packs these stickers came from. CC0, free for anything." }
+};
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+
+LIBRARY.forEach((a,id)=>{
+  a.id = id;
+  if (!a.file) return;   // configurable animations are rendered in the browser, no file
+  a.name = a.file.split("/").pop();
+  a.url = a.file.split("/").map(encodeURIComponent).join("/");
+  a.ext = a.name.split(".").pop().toUpperCase();
+});
+const slug = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") || "animation";
+const byCat = c => LIBRARY.filter(a=>a.cat===c);
+const esc = s => String(s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtSize = b => b>=1e6 ? (b/1048576).toFixed(1)+" MB" : Math.max(1,Math.round(b/1024))+" KB";
+const fmtTime = s => !isFinite(s) ? "–:––" : Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0");
+const fmtDur = s => !isFinite(s) ? "–:––" : s<10 ? (s<1 ? s.toFixed(1) : Math.round(s))+"s" : fmtTime(s);
+const icon = (id, cls="i") => `<svg class="${cls}"><use href="#${id}"/></svg>`;
+
+/* ---------- small bits ---------- */
+function toast(msg){
+  const t=$("#toast"); t.querySelector("span").textContent=msg; t.classList.add("show");
+  clearTimeout(toast.h); toast.h=setTimeout(()=>t.classList.remove("show"),2200);
+}
+
+$$(".js-discord").forEach(a=>{
+  if (DISCORD_URL) a.href = DISCORD_URL;
+  else a.addEventListener("click", e=>{ e.preventDefault(); toast("Discord link coming soon"); });
+});
+
+$("#copyIp").addEventListener("click", async ()=>{
+  const s=$("#copyState"), ic=$("#copyIcon use");
+  try{ await navigator.clipboard.writeText(SERVER_IP); s.textContent="Copied"; ic.setAttribute("href","#i-check"); toast("Server IP copied"); }
+  catch{ toast("Copy blocked, the IP is "+SERVER_IP); }
+  setTimeout(()=>{ s.textContent="Copy"; ic.setAttribute("href","#i-copy"); },1800);
+});
+
+// theme toggle
+$("#themeBtn").addEventListener("click", ()=>{
+  const root=document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+  try{ localStorage.setItem("dch-theme", root.dataset.theme); }catch{}
+});
+
+// header shadow on scroll
+addEventListener("scroll", ()=>$("#top").classList.toggle("scrolled", scrollY>8), {passive:true});
+
+// counts
+function paintCounts(){
+  $$("[data-count]").forEach(el=>{
+    const c=el.dataset.count; el.textContent = c==="all" ? LIBRARY.length : byCat(c).length;
+  });
+}
+
+// floating cubes in the hero (fixed layout so it looks the same every load)
+(function cubes(){
+  const spots=[[4,14,26,"#7fe3ff"],[12,70,18,"#fff"],[46,8,16,"#e0a267"],[52,86,22,"#7fe3ff"],[88,18,20,"#fff"],[93,62,28,"#e0a267"],[70,92,14,"#fff"],[30,90,12,"#e0a267"],[64,4,12,"#fff"]];
+  $("#cubes").innerHTML = spots.map(([x,y,s,c],i)=>
+    `<span class="cube" style="--x:${x}%;--y:${y}%;--s:${s}px;--c:${c};--d:${4+i%4}s;--dl:${-i*.7}s;--r:${(i*23)%45}deg"></span>`).join("");
+})();
+
+// marquee
+(function marquee(){
+  const words=["Free music","Animations","Sound effects","Thumbnail images","Stickers","Video feedback","Collabs","Java + Bedrock","donutsmp.net","Made by creators"];
+  const run=words.map(w=>`<span>${w}</span>`).join("");
+  $("#marquee").innerHTML = run+run;
+})();
+
+/* ---------- waveform ---------- */
+function hash(s){ let h=2166136261; for(const c of s){ h^=c.charCodeAt(0); h=Math.imul(h,16777619); } return h>>>0; }
+function rng(seed){ return ()=>{ seed=(seed+0x6D2B79F5)|0; let t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function waveBars(a, n=44){
+  const r=rng(hash(a.file));
+  return Array.from({length:n},(_,i)=>{
+    const t=i/(n-1);
+    const env = a.cat==="sfx" ? Math.min(1,t*7+.1)*Math.pow(1-t,1.2)+.1 : .6+.3*Math.sin(t*Math.PI)+.1*Math.sin(t*19);
+    return Math.max(.1, Math.min(1, env*(.45+r()*.65))).toFixed(2);
+  }).map(h=>`<i style="--h:${h}"></i>`).join("");
+}
+
+/* ---------- cards ---------- */
+const DUR = {}, DIM = {};
+
+function dlButton(a, label="Download"){
+  const info = a.size ? `${a.ext}, ${fmtSize(a.size)}` : a.ext;
+  return `<a class="btn btn-sm" href="${a.url}" download="${esc(a.name)}" data-dl="${a.id}" aria-label="Download ${esc(a.title)} (${info})">${icon("i-dl")}${label}</a>`;
+}
+const tagList = a => `<div class="tags">${a.tags.map(t=>`<span>${esc(t)}</span>`).join("")}</div>`;
+
+function soundCard(a){
+  const bars = waveBars(a);
+  return `<article class="card snd c-${a.cat}" data-id="${a.id}">
+    <div class="snd-top">
+      <button class="pp" type="button" data-play="${a.id}" aria-pressed="false" aria-label="Play ${esc(a.title)}">
+        <svg class="i-play"><use href="#i-play"/></svg><svg class="i-pause"><use href="#i-pause"/></svg>
+      </button>
+      <div><h3>${esc(a.title)}</h3><div class="by">${esc(a.by || CATS[a.cat].label.replace(/s$/,""))} · ${a.ext} · ${fmtSize(a.size)}</div></div>
+      <span class="dur" data-dur="${a.id}">${fmtDur(DUR[a.id])}</span>
+    </div>
+    <div class="wave" data-wave="${a.id}" role="slider" tabindex="0" aria-label="Seek ${esc(a.title)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="bars">${bars}</div><div class="bars fill">${bars}</div><span class="head"></span>
+    </div>
+    <div class="snd-foot">
+      <div class="tags">${a.tags.map(t=>`<span>${esc(t)}</span>`).join("")}</div>
+      ${dlButton(a)}
+    </div>
+  </article>`;
+}
+
+function imageCard(a){
+  const dim = DIM[a.id] ? ` · ${DIM[a.id]}` : "";
+  return `<article class="card imgc c-images" data-id="${a.id}">
+    <button class="img-prev" type="button" data-zoom="${a.id}" aria-label="Enlarge ${esc(a.title)}">
+      <img src="${a.url}" alt="${esc(a.title)}" loading="lazy" data-img="${a.id}">
+      <span class="zoom">${icon("i-expand")}</span>
+    </button>
+    <div class="img-body">
+      <h3>${esc(a.title)}</h3>
+      <div class="meta" data-meta="${a.id}">${a.ext}${dim} · ${fmtSize(a.size)}</div>
+      <div class="row"><div class="tags">${a.tags.map(t=>`<span>${esc(t)}</span>`).join("")}</div>${dlButton(a)}</div>
+    </div>
+  </article>`;
+}
+// animations: a ready file (Download + Green screen) or a configurable one (Configure)
+function animCard(a){
+  const prev = a.config
+    ? `<canvas data-anim="${a.anim}" aria-label="Preview of ${esc(a.title)}" role="img"></canvas>`
+    : `<video src="${a.url}" muted loop playsinline autoplay preload="metadata" aria-label="Preview of ${esc(a.title)}"></video>`;
+  const kind = a.config ? (a.cat==="images" ? "PNG · you set the text" : "Video · you set it up") : `WEBM · transparent · ${a.secs}s · ${fmtSize(a.size)}`;
+  const acts = a.config
+    ? `<button class="btn btn-sm btn-dough" type="button" data-config="${a.id}">${icon("i-gear")}Configure</button>`
+    : `<button class="btn btn-sm btn-white" type="button" data-green="${a.id}" title="Record a green screen MP4 for editors without WebM support">Green screen</button>${dlButton(a)}`;
+  return `<article class="card imgc c-${a.cat}" data-id="${a.id}">
+    <div class="anim-prev">${prev}${a.config?`<span class="badge cfg">Configurable</span>`:""}</div>
+    <div class="img-body">
+      <h3>${esc(a.title)}</h3>
+      <div class="meta">${kind}</div>
+      <div class="row">${tagList(a)}<div class="btn-row">${acts}</div></div>
+    </div>
+  </article>`;
+}
+
+function stickerTile(a){
+  return `<article class="card stk" data-id="${a.id}">
+    <button class="stk-prev" type="button" data-zoom="${a.id}" aria-label="Enlarge ${esc(a.title)}"><img src="${a.url}" alt="${esc(a.title)}" loading="lazy" data-img="${a.id}"></button>
+    <div class="stk-foot"><span title="${esc(a.title)}">${esc(a.title)}</span>
+      <a class="dl-mini" href="${a.url}" download="${esc(a.name)}" data-dl="${a.id}" aria-label="Download ${esc(a.title)} (PNG)">${icon("i-dl")}</a></div>
+  </article>`;
+}
+
+function packCard(a){
+  return `<article class="card imgc c-packs" data-id="${a.id}">
+    <div class="pack-prev"><img src="${a.preview}" alt="Preview of ${esc(a.title)}" loading="lazy"><span class="badge">By Kenney</span></div>
+    <div class="img-body">
+      <h3>${esc(a.title)}</h3>
+      <div class="meta">ZIP · ${esc(a.count)} · ${fmtSize(a.size)}</div>
+      <div class="row">${tagList(a)}${dlButton(a,"Download .zip")}</div>
+    </div>
+  </article>`;
+}
+
+function cardFor(a){
+  if (a.config || a.cat==="animations") return animCard(a);
+  if (a.cat==="images") return imageCard(a);
+  if (a.cat==="stickers") return stickerTile(a);
+  if (a.cat==="packs") return packCard(a);
+  return soundCard(a);
+}
+const GRID_CLASS = { images:" imgs", animations:" imgs", stickers:" stks", packs:" imgs" };
+
+/* ---------- library page ---------- */
+const state = { cat:"all", q:"" };
+
+function renderCatStats(){
+  $("#catStats").innerHTML = Object.entries(CATS).map(([k,c])=>
+    `<a class="cat-stat" href="#assets/${k}"><span class="ico c-${k}">${icon(c.icon)}</span><div><strong>${byCat(k).length}</strong><span>${c.label}</span></div></a>`).join("");
+  $("#libMini").innerHTML = Object.entries(CATS).map(([k,c])=>
+    `<a href="#assets/${k}">${icon(c.icon)}${c.label}<b>${byCat(k).length}</b></a>`).join("");
+}
+
+function renderChips(){
+  const all = [["all","All",LIBRARY.length], ...Object.entries(CATS).map(([k,c])=>[k,c.label,byCat(k).length])];
+  $("#chips").innerHTML = all.map(([k,l,n])=>
+    `<a class="chip" href="${k==="all"?"#assets":"#assets/"+k}" aria-current="${state.cat===k}">${l} <span class="n">${n}</span></a>`).join("");
+}
+
+function matches(a,q){ return !q || [a.title,a.by||"",a.name||"",a.tags.join(" "),CATS[a.cat].label,a.config?"configurable":""].join(" ").toLowerCase().includes(q); }
+
+function renderLibrary(){
+  renderChips();
+  const q = state.q.trim().toLowerCase();
+  const cats = state.cat==="all" ? Object.keys(CATS) : [state.cat];
+  let html="", total=0;
+  cats.forEach(k=>{
+    const list = byCat(k).filter(a=>matches(a,q));
+    if (!list.length) return;
+    total += list.length;
+    const c = CATS[k];
+    html += `<section class="group">
+      <div class="group-head">
+        <span class="ico c-${k}">${icon(c.icon)}</span>
+        <div><h2>${c.label}</h2><div class="count">${list.length} ${list.length===1?c.one:c.one+"s"}</div></div>
+        ${c.note ? `<p class="note">${c.note}</p>` : ""}
+      </div>
+      <div class="grid${GRID_CLASS[k]||""}">${list.map(cardFor).join("")}</div>
+    </section>`;
+  });
+  if (!total){
+    const where = state.cat==="all" ? "the library" : CATS[state.cat].label.toLowerCase();
+    html = `<div class="card empty"><h3>Nothing in ${where} matches "${esc(state.q.trim())}"</h3><p>Try a different word, or search all categories.</p><button class="btn" type="button" data-clear>Clear search</button></div>`;
+  }
+  $("#library").innerHTML = html;
+  $("#clearQ").hidden = !state.q;
+  syncPlayers();
+  hookPreviews();
+}
+
+$("#q").addEventListener("input", e=>{ state.q=e.target.value; renderLibrary(); });
+function clearSearch(){ $("#q").value=""; state.q=""; renderLibrary(); $("#q").focus(); }
+$("#clearQ").addEventListener("click", clearSearch);
+
+/* ---------- audio player ---------- */
+const audio = new Audio();
+audio.preload = "none";
+let nowId = null, raf = 0;
+
+function play(id){
+  const a = LIBRARY[id];
+  if (nowId === id){ audio.paused ? audio.play().catch(playFail) : audio.pause(); return; }
+  nowId = id;
+  audio.src = a.url;
+  audio.play().catch(playFail);
+  $("#player").hidden = false;
+  document.body.style.setProperty("--player-h", $("#player").offsetHeight+"px");
+  $("#pbTitle").textContent = a.title;
+  $("#pbCat").textContent = CATS[a.cat].label;
+  const dl=$("#pbDl"); dl.href=a.url; dl.download=a.name; dl.dataset.dl=id;
+  syncPlayers();
+}
+function playFail(err){ if (err && err.name==="AbortError") return; toast("Couldn't play this file"); }
+function stop(){
+  audio.pause(); audio.removeAttribute("src"); audio.load();
+  nowId = null; $("#player").hidden = true; document.body.style.setProperty("--player-h","0px");
+  syncPlayers();
+}
+function seek(id, frac){
+  frac = Math.min(1, Math.max(0, frac));
+  if (nowId !== id) play(id);
+  const go = ()=>{ if (isFinite(audio.duration)) audio.currentTime = frac*audio.duration; };
+  if (audio.readyState >= 1) go(); else audio.addEventListener("loadedmetadata", go, {once:true});
+}
+
+function syncPlayers(){
+  const on = !audio.paused && nowId!==null;
+  $$("[data-play]").forEach(b=>{
+    const me = +b.dataset.play===nowId;
+    b.setAttribute("aria-pressed", me && on);
+    b.setAttribute("aria-label", (me && on ? "Pause " : "Play ")+LIBRARY[+b.dataset.play].title);
+    const card=b.closest(".snd"); card.classList.toggle("playing", me && on); card.classList.toggle("started", me);
+  });
+  const t=$("#pbToggle"); t.setAttribute("aria-pressed", on); t.setAttribute("aria-label", on?"Pause":"Play");
+  paintProgress();
+}
+function paintProgress(){
+  const d = audio.duration, p = nowId!==null && isFinite(d) && d>0 ? audio.currentTime/d*100 : 0;
+  $$(".wave").forEach(w=>{
+    const me = +w.dataset.wave===nowId;
+    w.style.setProperty("--p", (me?p:0)+"%"); w.setAttribute("aria-valuenow", Math.round(me?p:0));
+  });
+  $("#pbTrack").style.setProperty("--p", p+"%"); $("#pbTrack").setAttribute("aria-valuenow", Math.round(p));
+  $("#pbTime").textContent = fmtTime(audio.currentTime)+" / "+fmtTime(d);
+}
+function loop(){ paintProgress(); raf = requestAnimationFrame(loop); }
+audio.addEventListener("play", ()=>{ syncPlayers(); cancelAnimationFrame(raf); loop(); });
+audio.addEventListener("pause", ()=>{ syncPlayers(); cancelAnimationFrame(raf); });
+audio.addEventListener("ended", ()=>{ audio.currentTime=0; syncPlayers(); });
+audio.addEventListener("timeupdate", paintProgress); // keeps progress moving when rAF is throttled (background tabs)
+audio.addEventListener("loadedmetadata", ()=>{ if(nowId!==null){ DUR[nowId]=audio.duration; paintDur(nowId); } paintProgress(); });
+
+$("#pbToggle").addEventListener("click", ()=>{ if(nowId!==null) play(nowId); });
+$("#pbClose").addEventListener("click", stop);
+
+// seek by clicking / dragging a waveform or the player track
+function fracFrom(el, e){ const r=el.getBoundingClientRect(); return (e.clientX-r.left)/r.width; }
+document.addEventListener("pointerdown", e=>{
+  const w = e.target.closest(".wave, #pbTrack"); if (!w) return;
+  const id = w.id==="pbTrack" ? nowId : +w.dataset.wave; if (id===null) return;
+  seek(id, fracFrom(w,e));
+  const move = ev=>seek(id, fracFrom(w,ev));
+  const up = ()=>{ removeEventListener("pointermove",move); removeEventListener("pointerup",up); };
+  addEventListener("pointermove",move); addEventListener("pointerup",up);
+});
+document.addEventListener("keydown", e=>{
+  const w = e.target.closest && e.target.closest(".wave, #pbTrack");
+  if (!w || !["ArrowLeft","ArrowRight","Home","End"," ","Enter"].includes(e.key)) return;
+  e.preventDefault();
+  const id = w.id==="pbTrack" ? nowId : +w.dataset.wave; if (id===null) return;
+  if (e.key===" "||e.key==="Enter"){ play(id); return; }
+  const cur = nowId===id && isFinite(audio.duration) ? audio.currentTime/audio.duration : 0;
+  seek(id, e.key==="Home"?0 : e.key==="End"?.999 : cur+(e.key==="ArrowRight"?.05:-.05));
+});
+
+// durations: read just the metadata of each sound
+function paintDur(id){ $$(`[data-dur="${id}"]`).forEach(el=>el.textContent=fmtDur(DUR[id])); }
+function loadDurations(){
+  LIBRARY.filter(a=>a.cat==="music"||a.cat==="sfx").forEach(a=>{
+    const probe = new Audio(); probe.preload="metadata";
+    probe.addEventListener("loadedmetadata", ()=>{ DUR[a.id]=probe.duration; paintDur(a.id); probe.removeAttribute("src"); }, {once:true});
+    probe.src = a.url;
+  });
+}
+
+// image sizes, once they load
+document.addEventListener("load", e=>{
+  const img=e.target; if (!(img instanceof HTMLImageElement) || !img.dataset.img) return;
+  const a=LIBRARY[+img.dataset.img]; DIM[a.id]=img.naturalWidth+"×"+img.naturalHeight;
+  $$(`[data-meta="${a.id}"]`).forEach(m=>m.textContent=`${a.ext} · ${DIM[a.id]} · ${fmtSize(a.size)}`);
+}, true);
+
+/* ---------- lightbox ---------- */
+const lb = $("#lightbox");
+function openLightbox(id){
+  const a=LIBRARY[id];
+  $("#lbImg").src=a.url; $("#lbImg").alt=a.title;
+  $("#lbTitle").textContent=a.title;
+  $("#lbMeta").textContent=[a.ext, DIM[id], a.size && fmtSize(a.size), a.by && "by "+a.by].filter(Boolean).join(" · ");
+  const dl=$("#lbDl"); dl.href=a.url; dl.download=a.name; dl.dataset.dl=id;
+  lb.classList.toggle("dark", a.cat==="stickers");   // white particles need a dark backdrop
+  lb.showModal();
+}
+$("#lbClose").addEventListener("click", ()=>lb.close());
+lb.addEventListener("click", e=>{ if (e.target===lb) lb.close(); });
+
+function saveBlob(blob, name){
+  const href=URL.createObjectURL(blob), l=Object.assign(document.createElement("a"),{href,download:name});
+  document.body.append(l); l.click(); l.remove();
+  setTimeout(()=>URL.revokeObjectURL(href),15000);
+}
+
+/* ---------- animation previews + configurator ---------- */
+// animations.js draws every animation; if it failed to load the configurable ones can't work
+const ANIM_OK = () => !!window.DCH;
+const previewCanvases = new Set();
+const previewIO = "IntersectionObserver" in window ? new IntersectionObserver(es=>es.forEach(en=>
+  en.isIntersecting ? previewCanvases.add(en.target) : previewCanvases.delete(en.target))) : null;
+const DEFAULTS = {};
+function sizeCanvas(c, A, maxW=760){ const s=Math.min(1,maxW/A.w); c.width=Math.round(A.w*s); c.height=Math.round(A.h*s); c._s=s; }
+function hookPreviews(){
+  if (!ANIM_OK()) return;
+  if (previewIO) previewIO.disconnect();
+  previewCanvases.clear();
+  $$("canvas[data-anim]").forEach(c=>{
+    const A=DCH.ANIMS[c.dataset.anim]; if (!A) return;
+    sizeCanvas(c,A,560);
+    previewIO ? previewIO.observe(c) : previewCanvases.add(c);
+  });
+}
+function drawPreview(c, A, o, ms, bg){
+  const g=c.getContext("2d"), dur=A.dur(o);
+  const t = A.image ? dur : Math.min((ms/1000)%(dur+.9), dur-.001);   // loop with a short pause at the end
+  g.setTransform(c._s,0,0,c._s,0,0);
+  DCH.paint(g,A,t,o,bg);
+}
+
+const cfg = { dlg:$("#cfg"), item:null, key:null, opts:{}, bg:"transparent", t0:0, busy:false };
+function fieldHTML(f){
+  const id="f-"+f.key, wide=f.type==="text" ? " wide" : "";
+  if (f.type==="select") return `<label class="field${wide}" for="${id}">${esc(f.label)}<select id="${id}" data-key="${f.key}">${
+    f.options.map(([v,l])=>`<option value="${v}"${v===f.value?" selected":""}>${esc(l)}</option>`).join("")}</select></label>`;
+  const attrs=["min","max","step","maxlength"].filter(k=>f[k]!=null).map(k=>`${k}="${f[k]}"`).join(" ");
+  return `<label class="field${wide}" for="${id}">${esc(f.label)}<input id="${id}" data-key="${f.key}" type="${f.type}" value="${esc(f.value)}" ${attrs}></label>`;
+}
+function openConfig(id){
+  if (!ANIM_OK()) { toast("Couldn't load the animation tools, try refreshing"); return; }
+  const a=LIBRARY[id], A=DCH.ANIMS[a.anim];
+  Object.assign(cfg,{ item:a, key:a.anim, opts:DCH.defaults(a.anim), bg:"transparent", t0:performance.now() });
+  $("#cfgTitle").textContent=a.title;
+  $("#cfgMeta").textContent = A.image ? "Makes a transparent PNG you can drop on a thumbnail."
+    : "Plays the animation in your browser and records it. Transparent videos work best in Chrome or Edge.";
+  $("#cfgFields").innerHTML = A.fields.map(fieldHTML).join("");
+  $("#cfgBgWrap").hidden = !!A.image; $("#cfgBg").value="transparent";
+  $("#cfgPrev").classList.remove("green");
+  $("#cfgGo").innerHTML = icon("i-dl")+(A.image ? "Download PNG" : "Record & download");
+  $("#cfgProgress").hidden = true;
+  sizeCanvas($("#cfgCanvas"),A);
+  cfg.dlg.showModal();
+}
+$("#cfgFields").addEventListener("input", e=>{
+  const k=e.target.dataset.key; if (!k) return;
+  cfg.opts[k]=e.target.value; cfg.t0=performance.now();   // restart the preview so changes show right away
+});
+$("#cfgBg").addEventListener("change", e=>{ cfg.bg=e.target.value; $("#cfgPrev").classList.toggle("green", cfg.bg!=="transparent"); });
+$("#cfgClose").addEventListener("click", ()=>{ if (!cfg.busy) cfg.dlg.close(); });
+cfg.dlg.addEventListener("cancel", e=>{ if (cfg.busy) e.preventDefault(); });
+cfg.dlg.addEventListener("click", e=>{ if (e.target===cfg.dlg && !cfg.busy) cfg.dlg.close(); });
+
+$("#cfgGo").addEventListener("click", async ()=>{
+  if (cfg.busy) return;
+  const a=cfg.item, A=DCH.ANIMS[cfg.key];
+  if (A.image){
+    const blob=await DCH.renderPNG(cfg.key,cfg.opts), name=slug(cfg.opts.text||a.title)+".png";
+    saveBlob(blob,name); toast("Downloading "+name); return;
+  }
+  cfg.busy=true; const btn=$("#cfgGo"), bar=$("#cfgProgress i");
+  btn.classList.add("busy"); $("#cfgProgress").hidden=false; bar.style.width="0";
+  try{
+    const r=await DCH.record(cfg.key,cfg.opts,{bg:cfg.bg,onProgress:p=>bar.style.width=(p*100)+"%"});
+    const name=`${slug(a.title)}${r.transparent?"":"-greenscreen"}.${r.ext}`;
+    saveBlob(r.blob,name);
+    toast(cfg.bg==="transparent" && !r.transparent ? "Your browser can't record transparency, so it has a green background" : "Downloading "+name);
+  }catch(err){ toast(err.message || "Recording failed"); }
+  cfg.busy=false; btn.classList.remove("busy"); $("#cfgProgress").hidden=true;
+});
+
+// green screen MP4 of a ready-made animation
+async function recordGreen(id, btn){
+  if (!ANIM_OK()) { toast("Couldn't load the animation tools, try refreshing"); return; }
+  if (btn.classList.contains("busy")) return;
+  const a=LIBRARY[id], label=btn.textContent;
+  btn.classList.add("busy");
+  try{
+    const r=await DCH.record(a.anim,{},{bg:"#00ff00",loops:a.loops||1,onProgress:p=>btn.textContent=`Recording ${Math.round(p*100)}%`});
+    const name=`${slug(a.title)}-greenscreen.${r.ext}`; saveBlob(r.blob,name); toast("Downloading "+name);
+  }catch(err){ toast(err.message || "Recording failed"); }
+  btn.textContent=label; btn.classList.remove("busy");
+}
+
+function previewLoop(now){
+  if (ANIM_OK()){
+    for (const c of previewCanvases){ const A=DCH.ANIMS[c.dataset.anim]; drawPreview(c,A,DEFAULTS[c.dataset.anim] ||= DCH.defaults(c.dataset.anim),now,null); }
+    if (cfg.dlg.open) drawPreview($("#cfgCanvas"),DCH.ANIMS[cfg.key],cfg.opts,now-cfg.t0,cfg.bg==="transparent"?null:cfg.bg);
+  }
+  requestAnimationFrame(previewLoop);
+}
+
+/* ---------- click delegation ---------- */
+document.addEventListener("click", e=>{
+  const p=e.target.closest("[data-play]"); if (p){ play(+p.dataset.play); return; }
+  const z=e.target.closest("[data-zoom]"); if (z){ openLightbox(+z.dataset.zoom); return; }
+  const d=e.target.closest("[data-dl]"); if (d){ toast("Downloading "+LIBRARY[+d.dataset.dl].name); return; }
+  const sk=e.target.closest("[data-skin]"); if (sk){ downloadSkin(+sk.dataset.skin, sk); return; }
+  const cf=e.target.closest("[data-config]"); if (cf){ openConfig(+cf.dataset.config); return; }
+  const gr=e.target.closest("[data-green]"); if (gr){ recordGreen(+gr.dataset.green, gr); return; }
+  if (e.target.closest("[data-clear]")) clearSearch();
+});
+
+/* ---------- creators ---------- */
+const HEADS = "https://mc-heads.net";
+function creatorCard(c, i){
+  const watch = c.youtube
+    ? `<a class="btn btn-sm btn-white" href="${esc(c.youtube)}" target="_blank" rel="noopener">${icon("i-play")}YouTube</a>`
+    : `<a class="btn btn-sm btn-white" href="https://www.youtube.com/results?search_query=${encodeURIComponent(c.name+" donutsmp")}" target="_blank" rel="noopener">${icon("i-play")}Find videos</a>`;
+  const twitch = c.twitch ? `<a class="btn btn-sm btn-white" href="${esc(c.twitch)}" target="_blank" rel="noopener">${icon("i-ext")}Twitch</a>` : "";
+  return `<article class="card creator">
+    <div class="creator-art">
+      <span class="role${/owner/i.test(c.role)?" owner":""}">${esc(c.role)}</span>
+      <img class="body" src="${HEADS}/body/${c.uuid}/240" alt="${esc(c.name)}'s Minecraft skin" loading="lazy" data-skin-img>
+    </div>
+    <div class="creator-body">
+      <div class="creator-name"><img src="${HEADS}/avatar/${c.uuid}/72" alt="" loading="lazy" width="36" height="36"><div class="creator-id"><h3>${esc(c.name)}</h3>${c.ign ? `<span>IGN: ${esc(c.ign)}</span>` : ""}</div></div>
+      <div class="creator-links">
+        <button class="btn btn-sm" type="button" data-skin="${i}">${icon("i-dl")}Download skin</button>
+        ${watch}${twitch}
+        <a class="btn btn-sm btn-white" href="https://namemc.com/profile/${c.uuid}" target="_blank" rel="noopener" aria-label="${esc(c.name)} on NameMC">${icon("i-ext")}NameMC</a>
+      </div>
+    </div>
+  </article>`;
+}
+function renderCreators(){
+  $("#creatorGrid").innerHTML = CREATORS.map(creatorCard).join("");
+  $("#crew").innerHTML = CREATORS.map(c=>
+    `<a href="#creators"><img src="${HEADS}/head/${c.uuid}/88" alt="" loading="lazy" width="44" height="44"><span>${esc(c.name)}</span></a>`).join("");
+}
+// if the skin service is down, show a label instead of a broken image
+document.addEventListener("error", e=>{
+  const img=e.target; if (!(img instanceof HTMLImageElement) || !img.hasAttribute("data-skin-img")) return;
+  img.replaceWith(Object.assign(document.createElement("div"),{className:"skin-fallback",textContent:"Skin unavailable"}));
+}, true);
+
+async function downloadSkin(i, btn){
+  const c=CREATORS[i], url=`${HEADS}/skin/${c.uuid}`, name=`${c.name}-skin.png`;
+  btn.classList.add("busy");
+  try{
+    const r=await fetch(url); if(!r.ok) throw new Error(r.status);
+    saveBlob(await r.blob(), name);
+    toast("Downloading "+name);
+  }catch{
+    window.open(url,"_blank","noopener");
+    toast("Opened the skin, right-click it to save");
+  }
+  btn.classList.remove("busy");
+}
+
+/* ---------- reveal on scroll ---------- */
+const io = "IntersectionObserver" in window ? new IntersectionObserver(es=>es.forEach(en=>{
+  if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+}),{rootMargin:"0px 0px -8% 0px"}) : null;
+$$("[data-reveal]").forEach(el=> io ? io.observe(el) : el.classList.add("in"));
+
+/* ---------- routing ---------- */
+const PAGES = ["home","assets","creators"];
+let lastPage = null;
+function route(){
+  const [hashPage, sub] = location.hash.slice(1).split("/");
+  const page = PAGES.includes(hashPage) ? hashPage : "home";
+  PAGES.forEach(p=> $("#page-"+p).hidden = p!==page);
+  $$("[data-link]").forEach(a=> a.dataset.link===page ? a.setAttribute("aria-current","page") : a.removeAttribute("aria-current"));
+  if (page==="assets"){
+    state.cat = CATS[sub] ? sub : "all";
+    renderLibrary();
+    document.title = (state.cat==="all" ? "Assets" : CATS[state.cat].label)+" · Donut Creators Hub";
+  } else {
+    document.title = page==="creators" ? "Creators · Donut Creators Hub" : "Donut Creators Hub";
+  }
+  if (page!==lastPage) window.scrollTo(0,0);
+  lastPage = page;
+}
+addEventListener("hashchange", route);
+
+/* ---------- boot ---------- */
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+paintCounts();
+renderCatStats();
+renderCreators();
+$("#featured").innerHTML = FEATURED.map(t=>LIBRARY.find(a=>a.title===t)).filter(Boolean).map(cardFor).join("");
+route();
+loadDurations();
+if (ANIM_OK()) DCH.ready().then(()=>{ hookPreviews(); requestAnimationFrame(previewLoop); });
+</script>
+</body>
+</html>
